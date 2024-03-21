@@ -12,7 +12,8 @@ data class ChatItemData(
 
 data class Message(
     val message: String,
-    val date: String
+    val date: String,
+    val id: String
 )
 
 data class Chat(
@@ -20,5 +21,10 @@ data class Chat(
     val imageUrl: String? = null,
     val imageBitMap: Bitmap? = null,
     val messages: List<Message>
+)
+
+data class User(
+    val name:String,
+    val id:String,
 )
 

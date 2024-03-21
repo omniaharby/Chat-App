@@ -1,12 +1,14 @@
 package com.example.chatapp.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -19,7 +21,7 @@ import coil.request.ImageRequest
 fun CircularImage(
     bitmap: ImageBitmap? = null,
     imageUrl: String? = null,
-    imageSize: Dp = 100.dp,
+    imageSize: Dp = 50.dp,
     contentDescription: String?,
 ) {
     val painter = rememberAsyncImagePainter(
@@ -38,7 +40,7 @@ fun CircularImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(imageSize)
-                    .clip(CircleShape)
+                    .clip(CircleShape).border(2.dp, Color.Blue, CircleShape)
             )
         }
         imageUrl?.also {
@@ -48,7 +50,7 @@ fun CircularImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(imageSize)
-                    .clip(CircleShape)
+                    .clip(CircleShape).border(2.dp, Color.Blue, CircleShape)
             )
         }
     }
