@@ -1,4 +1,4 @@
-package com.example.chatapp.ui.home
+package com.example.chatapp.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.chatapp.domain.ChatItemData
-import com.example.chatapp.ui.components.CircularImage
 
 @Composable
 fun ChatItem(data: ChatItemData, onClickAction: (String) -> Unit) {

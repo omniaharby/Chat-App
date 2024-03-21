@@ -1,4 +1,4 @@
-package com.example.chatapp.ui.home
+package com.example.chatapp.ui.components
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
