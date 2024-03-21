@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.chatapp.ui.chat.ChatScreen
 import com.example.chatapp.ui.home.HomeScreen
 import com.example.chatapp.ui.login.LoginScreen
+import com.example.chatapp.ui.settings.SettingsScreen
 
 @Composable
 fun Navigation() {
@@ -21,7 +22,8 @@ fun Navigation() {
                             id = it
                         )
                     )
-                }
+                },
+                { navController.navigate("Settings") }
             )
         }
 
@@ -42,6 +44,12 @@ fun Navigation() {
             route = Screen.PinVerification.route
         ) {
             PinVerificationScreen(onPinEntered = { navController.navigate("Home") })
+        }
+
+        composable(
+            route = Screen.Settings.route
+        ) {
+            SettingsScreen()
         }
     }
 }

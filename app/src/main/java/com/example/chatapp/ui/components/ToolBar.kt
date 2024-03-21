@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ToolBar() {
+fun ToolBar(onSearchQueryChange: (String) -> Unit, goToSettings: () -> Unit) {
     Row(
         Modifier
             .height(65.dp)
@@ -33,14 +33,21 @@ fun ToolBar() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = "Chats", style = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold))
-        SearchView(query = "") {
-           
-       }
+        Row {
+            SearchView(query = "", onSearchQueryChange)
+            IconButton(onClick = goToSettings) {
+                Icon(
+                    Icons.Filled.MoreVert,
+                    contentDescription = "go to settings",
+                    tint = Color.DarkGray
+                )
+            }
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ShowToolbar() {
-    ToolBar()
+    ToolBar({}, {})
 }

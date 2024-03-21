@@ -16,7 +16,7 @@ import com.example.chatapp.ui.components.ChatsList
 import com.example.chatapp.ui.components.ToolBar
 
 @Composable
-fun HomeScreen(onChatClick: (String) -> Unit) {
+fun HomeScreen(onChatClick: (String) -> Unit, goToSettings: () -> Unit) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {/*Todo*/ },
@@ -31,7 +31,7 @@ fun HomeScreen(onChatClick: (String) -> Unit) {
         }
     ) {
         Column(modifier = Modifier.padding(it)) {
-            ToolBar()
+            ToolBar({}, goToSettings)
             ChatsList(data = getChats(), onChatClick)
         }
     }
