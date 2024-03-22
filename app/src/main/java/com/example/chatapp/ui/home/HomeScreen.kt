@@ -11,12 +11,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.chatapp.datasource.getChats
 import com.example.chatapp.ui.components.ChatsList
 import com.example.chatapp.ui.components.ToolBar
 
 @Composable
-fun HomeScreen(onChatClick: (String) -> Unit, goToSettings: () -> Unit) {
+fun HomeScreen(
+    onChatClick: (String) -> Unit,
+    goToSettings: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {/*Todo*/ },

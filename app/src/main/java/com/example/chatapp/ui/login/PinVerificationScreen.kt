@@ -8,8 +8,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun PinVerificationScreen(
-    onPinEntered: (String) -> Unit
+    onPinEntered: (String) -> Unit,
 ) {
+
     Button(
         onClick = { onPinEntered("") },
         modifier = Modifier
