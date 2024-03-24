@@ -31,7 +31,7 @@ fun MessageBubble(
     val alignment = remember { getMessageAlignment(message) }
     val backgroundColor = getBackgroundColor(alignment)
     val textColor = getTextColor(alignment)
-    val cornerShape = getCornerShape(alignment, isSameSender)
+    val cornerShape = remember { getCornerShape(alignment, isSameSender) }
     val paddingValues = PaddingValues(8.dp, if (isSameSender) 0.dp else 8.dp, 8.dp, 4.dp)
 
     Row(
@@ -115,7 +115,7 @@ fun getCornerShape(
     alignment: MessageAlignment,
     isSameSender: Boolean
 ): Shape {
-    return if (isSameSender) RoundedCornerShape(16.dp)
+    return if (isSameSender) RoundedCornerShape(10.dp)
     else getCornerShape(alignment)
 }
 

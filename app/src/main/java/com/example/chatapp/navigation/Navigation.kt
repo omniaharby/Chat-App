@@ -37,7 +37,7 @@ fun Navigation() {
         composable(
             route = Screen.Login.route
         ) {
-            LoginScreen(onGetPinAction = { navController.navigate("pinVerification") })
+            LoginScreen(onGetPinAction = { navController.navigate("PinVerification") })
         }
 
         composable(

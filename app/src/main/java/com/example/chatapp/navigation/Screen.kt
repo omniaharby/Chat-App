@@ -11,7 +11,7 @@ sealed class Screen(val route: String, val navArgs: List<NamedNavArgument> = emp
 
     data object Login : Screen(route = "Login")
 
-    data object PinVerification : Screen(route = "pinVerification")
+    data object PinVerification : Screen(route = "PinVerification")
     data object ChatScreen : Screen(
         route = "ChatScreen/{id}",
         navArgs = listOf(navArgument("id") {
