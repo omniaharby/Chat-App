@@ -9,6 +9,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -22,6 +24,9 @@ fun HomeScreen(
     goToSettings: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+
+    val chats by viewModel.chatList.collectAsState(initial = null)
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {/*Todo*/ },
@@ -35,9 +40,14 @@ fun HomeScreen(
                 })
         }
     ) {
+
         Column(modifier = Modifier.padding(it)) {
             ToolBar({}, goToSettings)
-            ChatsList(data = getChats(), onChatClick)
+            chats?.also {
+                ChatsList(data = getChats(), onChatClick)
+            }?.run {
+                // Todo handle empty state
+            }
         }
     }
 

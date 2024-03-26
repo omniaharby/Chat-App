@@ -5,6 +5,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,7 +43,8 @@ fun CircularImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(imageSize)
-                    .clip(CircleShape).border(2.dp, Color.Blue, CircleShape)
+                    .clip(CircleShape)
+                    .border(2.dp, Color.Blue, CircleShape)
             )
         }
         imageUrl?.also {
@@ -50,7 +54,17 @@ fun CircularImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(imageSize)
-                    .clip(CircleShape).border(2.dp, Color.Blue, CircleShape)
+                    .clip(CircleShape)
+                    .border(2.dp, Color.Blue, CircleShape)
+            )
+        } ?: run {
+            Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(imageSize)
+                    .clip(CircleShape)
+                    .border(2.dp, Color.Blue, CircleShape)
             )
         }
     }

@@ -7,25 +7,25 @@ import com.example.chatapp.domain.Message
 fun getChats() = listOf(
     ChatItemData(
         "Omnia",
-        "id1",
+        "1",
         "Hello dear how are you?",
         "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0"
     ),
     ChatItemData(
         "Omar",
-        "id1",
+        "2",
         "Hello dear how are you?",
         "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0"
     ),
     ChatItemData(
         "Rogi",
-        "id1",
+        "3",
         "Hello dear how are you?",
         "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0"
     ),
     ChatItemData(
         "Bodi",
-        "id1",
+        "4",
         "Hello dear how are you?",
         "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0" +
                 ""
@@ -34,7 +34,7 @@ fun getChats() = listOf(
 
 val chatList: List<Chat> = listOf(
     Chat(
-        name = "John",
+        name = "Omnia",
         imageUrl = "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0",
         messages = listOf(
             Message("Hello", "2024-03-20 10:00", "id1"),
@@ -49,12 +49,16 @@ val chatList: List<Chat> = listOf(
             Message("so see you next friday?", "2024-03-20 10:05", "id1"),
             Message("yes sure lets meet at the cafe near the beach", "2024-03-20 11:35", "id2"),
             Message("ok then, how is your sister?", "2024-03-20 11:45", "id1"),
-            Message("she is getting better, doctors said she will be fine by next week isa.", "2024-03-20 11:46", "id2"),
+            Message(
+                "she is getting better, doctors said she will be fine by next week isa.",
+                "2024-03-20 11:46",
+                "id2"
+            ),
             Message("great hope she gets well soon", "2024-03-20 11:55", "id1"),
         )
     ),
     Chat(
-        name = "Emma",
+        name = "Omar",
         imageUrl = "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0",
         messages = listOf(
             Message("Hey", "2024-03-20 11:00", "id3"),
@@ -63,7 +67,7 @@ val chatList: List<Chat> = listOf(
         )
     ),
     Chat(
-        name = "Michael",
+        name = "Rogi",
         imageUrl = "https://th.bing.com/th/id/R.808636cc55f2ccceac3dab65f59e06a0?rik=rYlKMlOaLmfyUg&pid=ImgRaw&r=0",
         messages = listOf(
             Message("Good evening", "2024-03-20 18:00", "id4"),
