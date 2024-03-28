@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class Repository @Inject constructor() {
+class ChatRepository @Inject constructor() {
 
     suspend fun getAllChats(): Flow<List<ChatItemData>> {
         return flow {

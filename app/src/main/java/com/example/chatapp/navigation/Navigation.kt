@@ -49,7 +49,7 @@ fun Navigation() {
         composable(
             route = Screen.Settings.route
         ) {
-            SettingsScreen()
+            SettingsScreen(onBackClick = { navController.navigateUp() })
         }
     }
 }

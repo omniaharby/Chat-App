@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,12 +25,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.chatapp.ui.login.LoginViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun PinVerificationScreen(
-    onPinEntered: (String) -> Unit
+    onPinEntered: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
 ) {
     var pin by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -45,35 +52,62 @@ fun PinVerificationScreen(
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            repeat(4) { index ->
-                PinDigitBox(
-                    digit = pin.getOrNull(index) ?: ' ',
-                    onDigitEntered = { digit ->
-                        if (digit.isDigit()) {
-                            pin = pin.take(index) + digit + pin.drop(index + 1)
-                            if (index == 5) {
-                                onPinEntered(pin)
-                            }
-                        }
-                    }
-                )
+        PinInputRow(pin, onDigitEntered = { digit ->
+            if (digit.isDigit()) {
+                pin += digit
+                if (pin.length == 4) {
+                    verifyPin(pin, {
+                        onPinEntered()
+                        viewModel.checkPin(it)
+                    }, coroutineScope)
+                }
             }
-        }
+        })
+
         Spacer(Modifier.height(10.dp))
+
         Button(
-            onClick = { onPinEntered("") },
+            onClick = {
+                verifyPin(pin, {
+                    onPinEntered()
+                    viewModel.checkPin(it)
+                }, coroutineScope)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
-            Text("check")
+            Text("Check")
         }
     }
-
 }
+
+@Composable
+private fun PinInputRow(pin: String, onDigitEntered: (Char) -> Unit) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        repeat(4) { index ->
+            PinDigitBox(
+                digit = pin.getOrNull(index) ?: ' ',
+                onDigitEntered = { digit ->
+                    onDigitEntered(digit)
+                }
+            )
+        }
+    }
+}
+
+private fun verifyPin(
+    pin: String,
+    onPinEntered: suspend (Int) -> Unit,
+    coroutineScope: CoroutineScope
+) {
+    if (pin.length == 4) {
+        coroutineScope.launch {
+            onPinEntered(pin.toInt())
+        }
+    }
+}
+
 
 @Composable
 fun PinDigitBox(

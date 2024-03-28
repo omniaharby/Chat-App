@@ -22,6 +22,7 @@ import coil.request.ImageRequest
 
 @Composable
 fun CircularImage(
+    modifier: Modifier = Modifier,
     bitmap: ImageBitmap? = null,
     imageUrl: String? = null,
     imageSize: Dp = 50.dp,
@@ -33,7 +34,7 @@ fun CircularImage(
     )
 
     Box(
-        modifier = Modifier.size(imageSize),
+        modifier = modifier.size(imageSize),
         contentAlignment = androidx.compose.ui.Alignment.Center,
     ) {
         bitmap?.also {

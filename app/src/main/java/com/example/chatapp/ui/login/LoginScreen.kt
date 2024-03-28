@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,12 +24,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(onGetPinAction: (String) -> Unit,loginViewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(
+    onGetPinAction: () -> Unit,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
     var phoneNumber by remember { mutableStateOf("") }
     var countryCode by remember { mutableStateOf("+1") } // Default country code
+    var isError by remember { mutableStateOf(false) }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -54,7 +61,8 @@ fun LoginScreen(onGetPinAction: (String) -> Unit,loginViewModel: LoginViewModel 
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)
+                .padding(bottom = 8.dp),
+            isError = countryCode.isBlank()
         )
 
         // Phone number input field
@@ -64,13 +72,23 @@ fun LoginScreen(onGetPinAction: (String) -> Unit,loginViewModel: LoginViewModel 
             label = { Text("Phone Number") },
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = isError
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { onGetPinAction(countryCode+phoneNumber) },
+            onClick = {
+                isError = phoneNumber.isBlank() || countryCode.isBlank()
+                if (!isError) {
+                    coroutineScope.launch {
+                        onGetPinAction()
+                        viewModel.registerWithPhoneNumber(countryCode + phoneNumber)
+                        // todo update action according to response
+                    }
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
@@ -79,3 +97,4 @@ fun LoginScreen(onGetPinAction: (String) -> Unit,loginViewModel: LoginViewModel 
         }
     }
 }
+
